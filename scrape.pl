@@ -65,7 +65,7 @@ foreach my $url (@links){
     $tree->parse($url);
     $tree = $tree->look_down('_tag', 'body');
     if($tree){
-    	#$tree->dump; # a method we inherit from HTML::Element
+    	$tree->dump; # a method we inherit from HTML::Element
     	print FH $filter->filter($tree->as_HTML($entities, $indent_char, {}));
     } else{
     	warn "No body tag found";
