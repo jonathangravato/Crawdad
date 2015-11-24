@@ -16,21 +16,10 @@ while(<FH>) {
 close FH;
 
 my $dir = "";
-my $tag = "";
-my $class = "";
-
-while($dir eq "" || $tag eq "" || $class eq ""){
+while($dir eq ""){
 print "What is the name of the site we are working on? ";
 $dir = <STDIN>;
-chomp $dir;
-
-print "What is the container we are looking for?";
-$tag = <STDIN>;
-chomp $tag;
-
-print "Classes of the container? (Separated by spaces)";
-$class = <STDIN>;
-chomp $class; 
+chomp $dir; 
 }
 
 mkdir($dir);
@@ -74,17 +63,16 @@ foreach my $url (@links){
 
 	my $tree = HTML::TreeBuilder->new_from_url($url);
     $tree->parse($url);
-    $tree = $tree->look_down(
-    	_tag => $tag,
-    	class => $class
-    );
+    #$tree = $tree->look_down('_tag', 'body');
     if($tree){
     	$tree->dump; # a method we inherit from HTML::Element
-    	print FH $filter->filter($tree->as_HTML($entities, $indent_char, {}));
-    	#print FH $tree->as_HTML($entities, $indent_char, {});
+    	#print FH $filter->filter($tree->as_HTML($entities, $indent_char, {}));
+    	print FH $tree->as_HTML($entities, $indent_char, {});
     } else{
-    	warn "Could not find " . $tag . " tag in this file with class(es) of " . $class . ".";
+    	warn "No body tag found";
     }
+
+    
 
 	close FH;
 
