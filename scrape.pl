@@ -40,19 +40,19 @@ my $indent_char = "\t";
 
 my $filter = HTML::TagFilter->new(
 	allow=>{ 
-		div 	=> { class => ['none'], id => ['none'] },
-		nav 	=> { class => ['none'], id => ['none'] },
-		a 		=> { class => ['none'], id => ['none'], href => [] },
-		p 		=> { class => ['none'], id => ['none'] },
-		span 	=> { class => ['none'], id => ['none'] },
-		ul 		=> { class => ['none'], id => ['none'] },
-		li 		=> { class => ['none'], id => ['none'] },
-		h1 		=> { class => ['none'], id => ['none'] },
-		h2 		=> { class => ['none'], id => ['none'] },
-		h3 		=> { class => ['none'], id => ['none'] },
-		h4 		=> { class => ['none'], id => ['none'] },
-		h5 		=> { class => ['none'], id => ['none'] },
-		h6 		=> { class => ['none'], id => ['none'] },
+		#div => { class => ['none'], id => ['none'] },
+		#nav => { class => ['none'], id => ['none'] },
+		a 	=> { class => ['none'], id => ['none'], href => [] },
+		p 	=> { class => ['none'], id => ['none'] },
+		span => { class => ['none'], id => ['none'] },
+		ul 	=> { class => ['none'], id => ['none'] },
+		li 	=> { class => ['none'], id => ['none'] },
+		h1 	=> { class => ['none'], id => ['none'] },
+		h2 	=> { class => ['none'], id => ['none'] },
+		h3 	=> { class => ['none'], id => ['none'] },
+		h4 	=> { class => ['none'], id => ['none'] },
+		h5 	=> { class => ['none'], id => ['none'] },
+		h6 	=> { class => ['none'], id => ['none'] },
 		img 	=> { src => [] }
 	},
 	log_rejects => 1,
@@ -74,6 +74,7 @@ foreach my $url (@links){
 
 	my $tree = HTML::TreeBuilder->new_from_url($url);
     $tree->parse($url);
+<<<<<<< HEAD
     $tree = $tree->look_down(
     	_tag => $tag,
     	class => $class
@@ -82,10 +83,22 @@ foreach my $url (@links){
     	$tree->dump; # a method we inherit from HTML::Element
     	print FH $filter->filter($tree->as_HTML($entities, $indent_char, {}));
     	#print FH $tree->as_HTML($entities, $indent_char, {});
+=======
+    #$tree = $tree->look_down('_tag', 'body');
+    if($tree){
+    	$tree->dump; # a method we inherit from HTML::Element
+    	print FH $filter->filter($tree->as_HTML($entities, $indent_char, {}));
+    	#print FH $tree->as_HTML($entities, $indent_char, {})
+>>>>>>> 1bd416ceeb6d9e305049535217c2cf35d51b31d1
     } else{
     	warn "Could not find " . $tag . " tag in this file with class(es) of " . $class . ".";
     }
 
+<<<<<<< HEAD
+=======
+    #testing github
+
+>>>>>>> 1bd416ceeb6d9e305049535217c2cf35d51b31d1
 	close FH;
 
 }
