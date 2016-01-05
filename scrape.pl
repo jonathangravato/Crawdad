@@ -40,7 +40,7 @@ while($dir eq "" || $tag eq "" ){
 }
 
 do { 
-	print " Search for ( C )lasses or ( I )D's?";
+	print " Search for (c)lasses or (i)d's?";
 	$choice = <STDIN>;
 	chomp $choice;
 	$choice = lc $choice;
@@ -113,7 +113,7 @@ foreach my $link (@links){
 #testing shtuff
 		    if ($tree ~~ undef){
 		    	do {
-	    			warn "$tag with class(es) of $class do(es) not exist on current page.  Look for another? ( Y )es or ( N )o";
+	    			warn "$tag with class(es) of $class do(es) not exist on current page.  Look for another? (y)es or (n)o";
 			    	$answer = <STDIN>;
 					chomp $answer;
 					$answer = lc $answer;
@@ -146,7 +146,7 @@ foreach my $link (@links){
 #testing shtuff
 	    	if ($tree ~~ undef){
 	    		do {
-	    			warn "$tag with id of $id does not exist on current page.  Look for another? ( Y )es or ( N )o";
+	    			warn "$tag with id of $id does not exist on current page.  Look for another? (y)es or (n)o";
 			    	$answer = <STDIN>;
 					chomp $answer;
 					$answer = lc $answer;
@@ -191,15 +191,19 @@ foreach my $link (@links){
 		my $clean_html = $hss->scrub($tree);
 
 	    if($tree){
+	    	print "\n\n";
 	    	print "Content-type: text/html", "\n"; print "Pragma: no-cache", "\n\n";
 			print FH $clean_html;
 
 	    } else{
 	    	if ($id eq "") {
+	    		print "\n\n";
 		    	warn "Could not find " . $tag . " tag in this file with class(es) of " . $class . ".";
 		    } elsif ($class eq "") {
+		    	print "\n\n";
 		    	warn "Could not find " . $tag . " tag in this file with id of " . $id . ".";
 		    } else {
+		    	print "\n\n";
 		    	warn "There may be an error in returned data due to unspecified classes or ids.";
 		    	exit;
 		    } 
@@ -208,8 +212,10 @@ foreach my $link (@links){
 	} else {
 		my $response = $HTML::TreeBuilder::lwp_response;
 		if ($response->is_success) {
+			print "\n\n";
 	        warn "Content of $link is not HTML, it's " . $response->content_type . "\n";
 	    } else {
+	    	print "\n\n";
 	        warn "Couldn't get $link: ", $response->status_line, "\n";
 	    }
 	}
