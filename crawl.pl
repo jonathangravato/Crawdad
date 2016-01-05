@@ -125,5 +125,3 @@ sub parse_html {
 close FILE;
 
 __DATA__
-Featured at:
-http://blogs.perl.org/users/stas/2013/01/web-scraping-with-modern-perl-part-1.html
